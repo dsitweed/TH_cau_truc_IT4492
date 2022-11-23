@@ -1,0 +1,47 @@
+.sidebar {
+    height: calc(100vh - 50px); /* what for = full screen */
+    background-color: rgb(251, 251, 251);
+    position: sticky;
+    top: 50px; /* what for */
+}
+
+.sidebarWrapper {
+    padding: 20px;
+    color: #555;
+}
+
+.sidebarMenu {
+}
+
+.sidebarMenu + .sidebarMenu {
+    margin-top: 10px;
+}
+
+.sidebarTitle {
+    font-size: 13px;
+    color: black;
+}
+
+.sidebarList  {
+    list-style: none;
+    padding: 5px;
+}
+
+.sidebarListItem {
+    padding: 2px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+}
+
+/* After selected -> change */
+.sidebarListItem.active, 
+.sidebarListItem:hover {
+    background-color: rgb(240, 240, 255);
+}
+
+.sidebarIcon {
+    margin-right: 5px;
+    font-size: 25px !important;
+}
