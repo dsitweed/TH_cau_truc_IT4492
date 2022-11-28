@@ -10,7 +10,7 @@ export const Topbar = () => {
             <div className="topbarWrapper">
                 <div className="topLeft">
                     {/* Image Logo of Web */}
-                    <img className="imgLogo" src="logo_bear.png" alt="ImgLogo" width={"50px"} height={"50px"}/>
+                    <img className="imgLogo" src={process.env.PUBLIC_URL + '/logo_bear.png'} alt="ImgLogo" width={"50px"} height={"50px"}/>
                     <span className="logo">Admin</span>
                 </div>
                 <div className="topRight">
