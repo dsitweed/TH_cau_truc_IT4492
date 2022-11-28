@@ -1,0 +1,278 @@
+openapi: 3.0.0
+servers:
+  - description: SwaggerHub API Auto Mocking
+    url: http://localhost:3000/api
+info:
+  description: This is a simple API
+  version: "1.0.0"
+  title: Warehouse management system API
+  contact:
+    email: you@your-company.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+tags:
+  - name: products
+    description: All products
+  - name: suppliers
+    description: Operations of users staff
+paths:
+  /products:
+    get:
+      tags:
+        - products
+      summary: get a list of products
+      description: |
+        Search by passing in the appropriate parameters
+      parameters:
+        - in: query
+          name: name
+          description: pass an optional search string for looking up inventory
+          schema:
+            type: string
+        - in: query
+          name: color
+          description: color of expected product
+          schema:
+            type: integer
+            format: int32
+            minimum: 0
+        - in: query
+          name: size
+          description: size of expected product
+          schema:
+            type: string
+        - in: query
+          name: cat
+          description: category of expected product
+          schema:
+            type: string
+      responses:
+        '200':
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+        '400':
+          description: bad input parameter
+    post:
+      tags:
+        - products
+      summary: adds a new product
+      description: Adds an item to the system
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      responses:
+        '201':
+          description: item created
+        '400':
+          description: 'invalid input, object invalid'
+        '409':
+          description: an existing item already exists
+  /products/{product_id}:
+    get:
+      tags:
+        - products
+      summary: Get product associated with given product_id
+      parameters:
+        - in: path
+          name: product_id
+          description: ID of the product in query
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+  /suppliers:
+    post:
+      tags:
+        - suppliers
+      summary: Thêm nhà cung cấp mới
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: 'Meta Inc'
+                address:
+                  type: string
+                  example: 'Ha Noi, Viet Nam'
+                cperson:
+                  type: string
+                  example: 'Mark Zuckerberg'
+                cperson_phone:
+                  type: string
+                  example: '2092014567'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Supplier'
+  /suppliers/{supplier_id}:
+    put:
+      tags:
+        - suppliers
+      summary: Update thong tin nhà cung cấp
+      parameters:
+        - in: path
+          name: supplier_id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Supplier'
+    delete:
+      tags:
+        - suppliers
+      summary: Xóa nhà cung cấp
+      parameters:
+        - in: path
+          name: supplier_id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Supplier'
+  /images:
+    post:
+      tags:
+        - images
+      summary: Upload ảnh
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Image'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+  /images/{image_id}:
+    get:
+      tags:
+        - images
+      summary: Get an image
+      parameters:
+        - in: path
+          name: image_id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                  img:
+                    type: string
+                    format: base64
+components:
+  schemas:
+    Supplier:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: b340f1ee-6cd4-4b01-90e6-d701748f0851
+        name:
+          type: string
+          example: 'Meta Inc'
+        address:
+          type: string
+          example: 'Ha Noi, Viet Nam'
+        cperson:
+          type: string
+          example: 'Mark Zuckerberg'
+        cperson_phone:
+          type: string
+          example: '2092014567'
+        status:
+          type: string
+          enum: ['active', 'inactive']
+          default: 'active'
+    Product:
+      type: object
+      required:
+        - id
+        - supplierId
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: d290f1ee-6c54-4b01-90e6-d701748f0851
+        name:
+          type: string
+          example: Tee basic ss1 CREWZ áo thun tay lỡ unisex Local Brand - AO_THUN_DVR
+        description:
+          type: string
+          example: 
+        idImages:
+          type: array
+          items:
+            type: string
+        status:
+          type: string
+          enum: ['active', 'inactive']
+          default: 'active'
+    Image:
+      type: object
+      required:
+        - id
+        - img_buffer
+        - img_type
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: d290f1ee-6c54-4b01-90e6-d701748f0851
+        img_buffer:
+          type: object
+        img_type:
+          type: string
+          enum: ['png', 'jpeg', 'jpg', 'webp']
