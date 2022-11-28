@@ -4,7 +4,8 @@ const SupplierSchema = new mongoose.Schema({
     // id mongoose auto generate
     name: {
         type: String,
-        required:true
+        required:true,
+        unique: true
     },
     address: {
         type: String
