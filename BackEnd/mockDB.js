@@ -1,4 +1,4 @@
-const suppliers = [
+const suppliers= [
     {
         "name": "Meta Inc",
         "address": "Ha Noi Viet Nam",

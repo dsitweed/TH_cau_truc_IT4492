@@ -1,0 +1,27 @@
+{
+	"definition": {
+		"openapi": "3.0.0",
+		"info": {
+			"title": "Warehouse management system",
+			"version": "1.0.0",
+			"description": "API documents of module M13"
+		},
+		"servers": [
+			{
+				"url": "http://localhost:8080",
+				"description": "Development server"
+			}
+		],
+		"tags": [
+			{
+				"name": "products",
+				"description": "Products operations"
+			},
+			{
+				"name": "users",
+				"description": "Users operations"
+			}
+		]
+	},
+	"apis": ["./routes/*.js"]
+}

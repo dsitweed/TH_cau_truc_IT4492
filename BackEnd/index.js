@@ -5,7 +5,11 @@ import cookieParser from "cookie-parser";
 import cors from 'cors';
 import 'dotenv/config';
 
+import "./models/index.js";
 import supplierRouter from "./routes/supplierRoute.js";
+import stockRouter from "./routes/stockRoute.js";
+import productsRouter from "./routes/products.js";
+import categoriesRouter from "./routes/categories.js";
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -35,4 +39,6 @@ mongoose.connect(URI)
 
 
 app.use('/api/suppliers', supplierRouter);
-app.user
+app.use('/stock', stockRouter);
+app.use("/api/categories", categoriesRouter);
+app.use("/api/products", productsRouter);

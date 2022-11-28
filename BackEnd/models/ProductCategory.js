@@ -11,4 +11,4 @@ const ProductCategorySchema = new Schema({
     }
 });
 
-export const ProductCategoryModel = mongoose.model('ProductCategory_MERN_App', ProductCategorySchema);
+export const ProductCategoryModel = mongoose.model('ProductCategory_IT4492', ProductCategorySchema);
