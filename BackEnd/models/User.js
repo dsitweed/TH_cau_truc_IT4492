@@ -1,38 +1,41 @@
-import mongoose, {Schema} from "mongoose";
+import mongoose from "mongoose";
 
-const UserSchema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema(
+  {
     role: {
-        type: String,
-        enum: ["admin", "staff"],
-        default: "admin",
-        required: true
+      type: String,
+      enum: ["admin", "staff"],
+      default: "admin",
+      required: true,
     },
-    firstname: String,
-    middlename: String,
+    firstName: String,
+    middleName: String,
     lastName: String,
     username: {
-        type: String,
-        required: true,
-        unique: true
+      type: String,
+      required: true,
+      unique: true,
     },
     email: {
-        type:String,
-        required:true,
-        unique:true
+      type: String,
+      required: true,
+      unique: true,
     },
     passwordHash: {
-        type: String,
-        required:false
+      type: String,
+      required: false,
     },
     phone: String,
     lastLogin: {
-        type: Date,
-        default: Date.now()
+      type: Date,
+      default: Date.now(),
     },
-    profilePic:{
-        type: Schema.Types.ObjectId,
-        default: ""
-    }
-}, { timestamps:true });
+    profilePic: {
+      type: mongoose.Schema.Types.ObjectId,
+      default: "",
+    },
+  },
+  { timestamps: true }
+);
 
-export const UserModel = mongoose.model('User_IT4492', UserSchema);
+export const UserModel = mongoose.model("users", UserSchema);

@@ -1,17 +1,20 @@
-import mongoose, {Schema} from "mongoose";
+import mongoose from "mongoose";
 
-const StockSchema = new Schema({
+const StockSchema = new mongoose.Schema(
+  {
     product_id: {
-        type: Schema.Types.ObjectId,
-        ref: "Product_IT4492",
-        required: true
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "products",
+      required: true,
     },
     quantity: {
-        type: Number,
-        default: 0,
+      type: Number,
+      default: 0,
     },
     size: String,
     color: String,
-}, {timestamps: true});
+  },
+  { timestamps: true }
+);
 
-export const StockModel = mongoose.model("Stock_IT4492", StockSchema);
+export const StockModel = mongoose.model("stocks", StockSchema);

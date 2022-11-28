@@ -1,21 +1,24 @@
-import mongoose, {Schema} from "mongoose";
+import mongoose from "mongoose";
 
-const ImageSchema = new Schema({
+const ImageSchema = new mongoose.Schema(
+  {
     productId: {
-        type: Schema.Types.ObjectId,
-        required: true
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
     },
     imageBuffer: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
     imageType: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     color: {
-        type: String,
-    }
-}, {timestamps: true});
+      type: String,
+    },
+  },
+  { timestamps: true }
+);
 
-export const ImageModel = mongoose.model('Image_IT4492', ImageSchema);
+export const ImageModel = mongoose.model("images", ImageSchema);

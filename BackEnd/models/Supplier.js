@@ -1,26 +1,28 @@
 import mongoose from "mongoose";
 
-const SupplierSchema = new mongoose.Schema({
-    // id mongoose auto generate
+const SupplierSchema = new mongoose.Schema(
+  {
     name: {
-        type: String,
-        required:true,
-        unique: true
+      type: String,
+      required: true,
+      unique: true,
     },
     address: {
-        type: String
+      type: String,
     },
     cperson: {
-        type: String
+      type: String,
     },
     cperson_phone: {
-        type: String
+      type: String,
     },
     status: {
-        type: String,
-        enum: ['active', 'inactive'],
-        default: 'active'
-    }
-}, { timestamps:true });
+      type: String,
+      enum: ["active", "inactive"],
+      default: "active",
+    },
+  },
+  { timestamps: true }
+);
 
-export const SupplierModel = mongoose.model('Supplier_IT4492', SupplierSchema);
+export const SupplierModel = mongoose.model("suppliers", SupplierSchema);
