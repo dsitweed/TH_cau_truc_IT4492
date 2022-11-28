@@ -19,7 +19,11 @@ const index = async (req, res) => {
   limit = limit ? Number(limit) : 10;
 
   try {
-    let items = await model.find().skip(skip).limit(limit);
+    let items = await model
+      .find()
+      .skip(skip)
+      .limit(limit)
+      .populate("categories");
     let total = await model.count();
 
     return res.json({
@@ -30,8 +34,9 @@ const index = async (req, res) => {
   } catch (error) {
     console.log(error);
     return res.json({
-      error,
       statusCode: 500,
+      error,
+      message: error.message,
     });
   }
 };

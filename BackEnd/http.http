@@ -105,7 +105,7 @@ POST http://localhost:5000/api/categories HTTP/1.1
 Content-Type: application/json
 
 {
-    "name":"Cinema"
+    "name":"Comedy"
 }
 
 ###
@@ -132,10 +132,10 @@ POST http://localhost:5000/api/products/ HTTP/1.1
 Content-Type: application/json
 
 {
-    "name": "Sơ mi", 
+    "name": "Sơ mi ngắn", 
     "supplierId": "63848b1fa175d658021e89d9",
     "description": "No",
-    "category_id": [1, 2, 3, 4],
+    "categories": ["6384b7c15b8b47a0e843bd7f", "6384b7cb5b8b47a0e843bd81"],
     "colors": ["FFFFFF",  "000000"],
     "sizes": [ "S", "M"],
     "img_urls": ["https://image/image1.png", "https://image/image2.png", "https://image/image3.png"]

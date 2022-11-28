@@ -5,7 +5,8 @@ import "dotenv/config";
 import express from "express";
 import mongoose from "mongoose";
 import productsRouter from "./routes/products.js";
-
+import { CategoryModel } from "./models/Category.js";
+import categoriesRouter from "./routes/categories.js";
 const app = express();
 const port = process.env.PORT || 5000;
 const URI = process.env.MDB_URI;
@@ -36,7 +37,7 @@ mongoose
 
 // app.use('/api/auth', auth);
 // app.use('/api/posts', posts);
-// app.use('/api/categories', categories);
+app.use("/api/categories", categoriesRouter);
 // app.use('/api/authorPost', authorPost);
 // app.use('/api/google', google);
 
