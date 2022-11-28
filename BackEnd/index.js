@@ -3,8 +3,9 @@ import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import cors from 'cors';
-import path from "path";
 import 'dotenv/config';
+
+import supplierRouter from "./routes/supplierRoute.js";
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -32,20 +33,6 @@ mongoose.connect(URI)
         console.log("err:", err);
     });
 
-// app.use('/api/auth', auth);
-// app.use('/api/posts', posts);
-// app.use('/api/categories', categories);
-// app.use('/api/authorPost', authorPost);
-// app.use('/api/google', google);
 
-app.use('/api/users', users);   
-// app.use('/api/products', porducts);
-
-/* API upload image */
-app.post('/api/upload', upload.single("file"), (req,res) => {
-    res.status(200).json("File has been uploaded");
-});
-
-app.get('/', (req, res) => {
-    res.json("heelo");
-})
+app.use('/api/suppliers', supplierRouter);
+app.user
