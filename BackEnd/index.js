@@ -3,16 +3,11 @@ import cors from "cors";
 import "dotenv/config";
 import express from "express";
 import mongoose from "mongoose";
-import bodyParser from "body-parser";
-import cookieParser from "cookie-parser";
-import cors from 'cors';
-import 'dotenv/config';
-
 import "./models/index.js";
-import supplierRouter from "./routes/supplierRoute.js";
-import stockRouter from "./routes/stockRoute.js";
-import productsRouter from "./routes/products.js";
 import categoriesRouter from "./routes/categories.js";
+import productsRouter from "./routes/products.js";
+import stockRouter from "./routes/stockRoute.js";
+import supplierRouter from "./routes/supplierRoute.js";
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -42,8 +37,7 @@ mongoose
     console.log("err:", err);
   });
 
-
-app.use('/api/suppliers', supplierRouter);
-app.use('/stock', stockRouter);
+app.use("/api/suppliers", supplierRouter);
+app.use("/stock", stockRouter);
 app.use("/api/categories", categoriesRouter);
 app.use("/api/products", productsRouter);
