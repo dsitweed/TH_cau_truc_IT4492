@@ -1,14 +1,19 @@
-import mongoose, {Schema} from "mongoose";
+import mongoose from "mongoose";
 
-const ProductCategorySchema = new Schema({
-    product_id: {
-    type: Schema.Types.ObjectId,
-    required: true
-    },
-    cart_id: {
-    type: Schema.Types.ObjectId,
-    required: true
-    }
+const ProductCategorySchema = new mongoose.Schema({
+  productId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "products",
+    required: true,
+  },
+  categoryId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "categories",
+    required: true,
+  },
 });
 
-export const ProductCategoryModel = mongoose.model('ProductCategory_IT4492', ProductCategorySchema);
+export const ProductCategoryModel = mongoose.model(
+  "productCategory",
+  ProductCategorySchema
+);

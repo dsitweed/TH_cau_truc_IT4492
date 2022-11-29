@@ -1,9 +1,9 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose from "mongoose";
 
 const ImageSchema = new mongoose.Schema(
   {
     productId: {
-      type: mongoose.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       required: true,
     },
     imageBuffer: {
@@ -29,4 +29,4 @@ ImageSchema.virtual("img").get(function () {
   }
 });
 
-export const ImageModel = mongoose.model("Image_IT4492", ImageSchema);
+export const ImageModel = mongoose.model("images", ImageSchema);

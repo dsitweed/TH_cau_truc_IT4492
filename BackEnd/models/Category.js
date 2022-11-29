@@ -1,10 +1,10 @@
-import mongoose, {Schema} from "mongoose";
+import mongoose from "mongoose";
 
 const CategorySchema = new mongoose.Schema({
-   name: {
+  name: {
     type: String,
     required: true,
-   }
-}, { timestamps:true });
+  },
+});
 
-export const CategoryModel = mongoose.model('Category_IT4492', CategorySchema);
+export const CategoryModel = mongoose.model("categories", CategorySchema);

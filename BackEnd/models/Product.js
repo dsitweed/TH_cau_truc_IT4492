@@ -8,15 +8,15 @@ const ProductSchema = new mongoose.Schema(
     },
     supplierId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Supplier_IT4492",
+      ref: "suppliers",
       required: true,
-    },
-    category_id: {
-      type: [String],
-      require: true
     },
     description: {
       type: String,
+    },
+    categories: {
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: "categories",
     },
     idImages: {
       type: [mongoose.Schema.Types.ObjectId],
@@ -30,4 +30,4 @@ const ProductSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export const ProductModel = mongoose.model("Product_IT4492", ProductSchema);
+export const ProductModel = mongoose.model("products", ProductSchema);
