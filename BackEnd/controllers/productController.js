@@ -1,6 +1,5 @@
 // eslint-disable-next-line no-unused-vars
 import express from "express";
-import mongoose from "mongoose";
 import { NOT_FOUND } from "../constants/error.js";
 import { ProductModel } from "../models/Product.js";
 
@@ -13,25 +12,32 @@ const model = ProductModel;
  * @returns
  */
 const index = async (req, res) => {
-  let { skip, limit } = req.query;
+  let { skip, limit, ...filter } = req.query;
 
   skip = skip ? Number(skip) : 0;
   limit = limit ? Number(limit) : 10;
 
+  if (filter.name) {
+    filter.name = { $regex: filter.name, $options: "i" };
+  }
+
   try {
-    let items = await model.find().skip(skip).limit(limit);
-    let total = await model.count();
+    let items = await model
+      .find(filter)
+      .skip(skip)
+      .limit(limit)
+      .populate("categories");
 
     return res.json({
       statusCode: 200,
       data: items,
-      total,
     });
   } catch (error) {
     console.log(error);
     return res.json({
-      error,
       statusCode: 500,
+      error,
+      message: error.message,
     });
   }
 };
@@ -73,6 +79,7 @@ const create = async (req, res) => {
   const data = req.body;
   try {
     let item = await model.create(data);
+    item.save();
     return res.json({
       statusCode: 200,
       data: item,

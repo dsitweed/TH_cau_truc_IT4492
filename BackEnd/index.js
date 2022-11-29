@@ -5,7 +5,7 @@ import express from "express";
 import mongoose from "mongoose";
 import "./models/index.js";
 import categoriesRouter from "./routes/categories.js";
-import productsRouter from "./routes/products.js";
+import productsRouter from "./routes/productsRoutes.js";
 import stockRouter from "./routes/stockRoute.js";
 import supplierRouter from "./routes/supplierRoute.js";
 
