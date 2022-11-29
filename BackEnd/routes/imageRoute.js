@@ -3,7 +3,7 @@ const router = express.Router();
 import { ImageModel } from "../models/Image.js";
 
 // setup multer
-const multer = require("multer");
+import multer from "multer";
 
 const upload = multer({
   storage: multer.memoryStorage(),
@@ -11,11 +11,7 @@ const upload = multer({
     fileSize: 1024 * 1024 * 10,
   },
   fileFilter: (req, file, cb) => {
-    if (
-      file.originalname.match(
-        /\.(jpg|JPG|jpeg|JPEG|png|PNG|gif|GIF|webp|WEBP)$/
-      )
-    ) {
+    if (file.originalname.match(/\.(jpg|JPG|jpeg|JPEG|png|PNG|gif|GIF|webp|WEBP)$/)) {
       cb(null, true);
     } else {
       cb(null, false);
@@ -41,7 +37,6 @@ router.post("/", upload.array("img"), async (req, res) => {
       const newImg = await image.save();
       imageIDs.push(newImg._id);
     }
-    // res.status(200).send(`<img src="data:${req.file.mimetype};base64,${req.file.buffer.toString('base64')}">`)
     res.status(200).json({
       images: imageIDs,
     });
@@ -51,16 +46,23 @@ router.post("/", upload.array("img"), async (req, res) => {
   }
 });
 
+// get all details about an image
 router.get("/:id", async (req, res) => {
   try {
-    const image = await ImageModel.findById(req.params.id).exec();
-    // res.status(200).json(img)
-    res.status(200).json({
-      _id: image._id,
-      productId: image.productId,
-      color: image.color,
-      img: image.img,
-    });
+    const image = await ImageModel.findById(req.params.id).select('-imageBuffer').exec();
+    res.status(200).json(image);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json(err);
+  }
+});
+
+// get image file only
+router.get("/image/:id", async (req, res) => {
+  try {
+    const image = await ImageModel.findById(req.params.id).select('imageType imageBuffer').exec();
+    res.status(200).contentType(image.imageType).send(image.imageBuffer);
+
   } catch (err) {
     console.error(err);
     res.status(500).json(err);

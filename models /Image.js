@@ -6,7 +6,7 @@ const ImageSchema = new Schema({
         required: true
     },
     imageBuffer: {
-        type: String,
+        type: Buffer,
         required: true,
     },
     imageType: {

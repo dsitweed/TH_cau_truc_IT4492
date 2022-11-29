@@ -7,7 +7,7 @@ const ImageSchema = new mongoose.Schema(
       required: true,
     },
     imageBuffer: {
-      type: String,
+      type: Buffer,
       required: true,
     },
     imageType: {
@@ -21,12 +21,10 @@ const ImageSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-ImageSchema.virtual("img").get(function () {
-  if (this.imageBuffer != null && this.imageType != null) {
-    return `data:${this.imageType};base64,${this.imageBuffer.toString(
-      "base64"
-    )}`;
-  }
-});
+// ImageSchema.virtual("img").get(function () {
+//   if (this.imageBuffer != null && this.imageType != null) {
+//     return `data:${this.imageType};base64,${this.imageBuffer.toString("base64")}`;
+//   }
+// });
 
 export const ImageModel = mongoose.model("images", ImageSchema);
