@@ -7,7 +7,7 @@ export const getSupplier = async (req, res) => {
     const listSupplier = await SupplierModel.find();
     res.status(200).json({ data: listSupplier, status_code: 200 });
   } catch (err) {
-    res.status(500).json({ error: err, status_code: 500 });
+    res.status(500).json({ error: err });
     console.log("err:", err);
   }
 };
@@ -20,10 +20,10 @@ export const getOneSupplier = async (req, res) => {
       console.log(finded);
       res.status(200).json({ data: finded, status_code: 200 });
     } else {
-        res.status(500).json({ error: FAILED, status_code: 500 });
+        res.status(500).json({ error: FAILED });
     }
   } catch (err) {
-    res.status(500).json({ error: err, status_code: 500 });
+    res.status(500).json({ error: err });
     console.log("err:", err);
   }
 };
@@ -37,10 +37,10 @@ export const createSupplier = async (req, res) => {
       await supplier.save();
       res.status(200).json({ data: supplier, status_code: 200 });
     } else {
-      res.status(500).json({ error: EXITS, status_code: 500 });
+      res.status(500).json({ error: EXITS });
     }
   } catch (err) {
-    res.status(500).json({ error: err, status_code: 500 });
+    res.status(500).json({ error: err });
     console.log("err:", err);
   }
 };
@@ -54,10 +54,10 @@ export const updateSupplier = async (req, res) => {
     if (updatedSupplier) {
         res.status(200).json({ data: updatedSupplier, status_code: 200 });
     } else {
-      res.status(500).json({ error: FAILED, status_code: 500 });
+      res.status(500).json({ error: FAILED });
     }
   } catch (err) {
-    res.status(500).json({ error: err, status_code: 500 });
+    res.status(500).json({ error: err });
     console.log("err:", err);
   }
 };
@@ -68,11 +68,11 @@ export const deleteSupplier = async (req, res) => {
     if (deleted) {
         res.status(200).json({ data: deleted, status_code: 200 });
     } else {
-      res.status(500).json({ error: FAILED, status_code: 500 });
+      res.status(500).json({ error: FAILED });
     }
   try {
   } catch (err) {
-    res.status(500).json({ error: err, status_code: 500 });
+    res.status(500).json({ error: err });
     console.log("err:", err);
   }
 };

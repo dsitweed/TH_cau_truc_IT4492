@@ -1,24 +1,26 @@
 import mongoose from "mongoose";
 
 const ImageSchema = new mongoose.Schema(
-  {
-    productId: {
-      type: mongoose.Schema.Types.ObjectId,
-      required: true,
-    },
-    imageBuffer: {
-      type: Buffer,
-      required: true,
-    },
-    imageType: {
-      type: String,
-      required: true,
-    },
-    color: {
-      type: String,
-    },
-  },
-  { timestamps: true }
+	{
+		productId: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'products',
+			required: true,
+		},
+		imageBuffer: {
+			type: Buffer,
+		},
+		imageType: {
+			type: String,
+		},
+		imageUrl: {
+			type: String
+		},
+		color: {
+			type: String,
+		},
+	},
+	{ timestamps: true }
 );
 
 // ImageSchema.virtual("img").get(function () {

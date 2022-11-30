@@ -11,8 +11,12 @@ const StockSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
-    size: String,
-    color: String,
+    size: {
+		type: String
+	},
+    color: {
+		type:String
+	},
   },
   { timestamps: true }
 );

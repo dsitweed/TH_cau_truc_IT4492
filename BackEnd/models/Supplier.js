@@ -9,12 +9,15 @@ const SupplierSchema = new mongoose.Schema(
     },
     address: {
       type: String,
+      required: true,
     },
     cperson: {
       type: String,
+      required: true,
     },
     cperson_phone: {
       type: String,
+      required: true,
     },
     status: {
       type: String,

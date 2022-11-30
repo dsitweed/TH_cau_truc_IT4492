@@ -20,6 +20,7 @@ const ProductSchema = new mongoose.Schema(
     },
     idImages: {
       type: [mongoose.Schema.Types.ObjectId],
+	  ref: "images"
     },
     status: {
       type: String,
