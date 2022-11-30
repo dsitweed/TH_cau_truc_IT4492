@@ -1,5 +1,6 @@
 @BASE_URL=http://localhost:5000/api
 @ID=63848b1fa175d658021e89d9
+@ID_stock=6387012759be74ce61670c6a
 
 ### With supplier
 
@@ -36,18 +37,33 @@ DELETE {{BASE_URL}}/suppliers/{{ID}} HTTP/1.1
 
 ### With Stock
 
-### Add more stock
+### get all stock 
 GET {{BASE_URL}}/stock HTTP/1.1
+Content-Type: application/json 
+
+### get one stock 
+GET {{BASE_URL}}/stock/{{ID_stock}} HTTP/1.1
+
+### Add more stock
+POST {{BASE_URL}}/stock HTTP/1.1
 Content-Type: application/json
 
 {
-    "product_id": "63848b1fa175d658021e89d9",
-    "quantity": "12",
+    "product_id": "63857ac6cfc63613528c02ad",
+    "quantity": 12,
     "zize": "XXL",
     "color": "34568B"
 }
 
-# Categories
+### Remove stock
+PUT {{BASE_URL}}/stock/{{ID_stock}} HTTP/1.1
+Content-Type: application/json
+
+{
+    "quantity": 8
+}
+
+### Categories
 ###
 POST http://localhost:5000/api/categories HTTP/1.1
 Content-Type: application/json

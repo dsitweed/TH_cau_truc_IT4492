@@ -22,7 +22,7 @@ import swaggerUi from 'swagger-ui-express';
 import YAML from "yamljs";
 const swaggerDoc = YAML.load('./api.yaml');
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc))
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 
 /* ****** Middleware ****** */
 app.use(express.json({ limit: "30mb" }));
@@ -50,7 +50,7 @@ mongoose.connect(URI, { useNewUrlParser: true, useUnifiedTopology: true })
 const db = mongoose.connection
 
 app.use("/api/suppliers", supplierRouter);
-app.use("/stock", stockRouter);
+app.use("/api/stock", stockRouter);
 app.use("/api/categories", categoriesRouter);
 app.use("/api/products", productsRouter);
 app.use("/api/image", imageRouter);

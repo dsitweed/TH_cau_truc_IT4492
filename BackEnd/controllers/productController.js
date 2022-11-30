@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import express from "express";
 import { NOT_FOUND } from "../constants/error.js";
-import { ProductModel } from "../models/Product.js";
+import { ProductModel } from "../models/index.js";
 
 const model = ProductModel;
 

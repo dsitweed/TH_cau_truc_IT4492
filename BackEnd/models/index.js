@@ -6,3 +6,13 @@ import { ProductCategoryModel } from "./ProductCategory.js";
 import { StockModel } from "./Stock.js";
 import { SupplierModel } from "./Supplier.js";
 import { UserModel } from "./User.js";
+
+export {
+  CategoryModel,
+  ImageModel,
+  ProductCategoryModel,
+  ProductModel,
+  StockModel,
+  SupplierModel,
+  UserModel,
+};
