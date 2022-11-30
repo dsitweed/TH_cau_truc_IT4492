@@ -8,7 +8,7 @@ import multer from "multer";
 const upload = multer({
   storage: multer.memoryStorage(),
   limits: {
-    fileSize: 1024 * 1024 * 10,
+    fileSize: 1024 * 1024 * 10, // image max size = 10Mb
   },
   fileFilter: (req, file, cb) => {
     if (file.originalname.match(/\.(jpg|JPG|jpeg|JPEG|png|PNG|gif|GIF|webp|WEBP)$/)) {
