@@ -1,5 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import express from "express";
+import mongoose from "mongoose";
 import { NOT_FOUND } from "../constants/error.js";
 import { ProductModel } from "../models/index.js";
 
@@ -12,16 +13,16 @@ const model = ProductModel;
  * @returns
  */
 const index = async (req, res) => {
-  let { skip, limit, ...filter } = req.query;
-
-  skip = skip ? Number(skip) : 0;
-  limit = limit ? Number(limit) : 10;
-
-  if (filter.name) {
-    filter.name = { $regex: filter.name, $options: "i" };
-  }
-
   try {
+    let { skip, limit, ...filter } = req.query;
+
+    skip = skip ? Number(skip) : 0;
+    limit = limit ? Number(limit) : 10;
+
+    if (filter.name) {
+      filter.name = { $regex: filter.name, $options: "i" };
+    }
+
     let items = await model
       .find(filter)
       .skip(skip)

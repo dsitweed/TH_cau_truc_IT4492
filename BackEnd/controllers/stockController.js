@@ -3,14 +3,14 @@ import { FAILED, NO_EXITS } from "../constants/index.js";
 import {StockModel, ProductModel} from "../models/index.js";
 
 export const getAllStock = async (req, res) => {
-    try {
-        const list = await StockModel.find();
-        res.status(200).json({data: list, status_code: 200});
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({error: err, status_code: 500});
-    }
-}
+  try {
+    const list = await StockModel.find();
+    res.status(200).json({ data: list, status_code: 200 });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: err, status_code: 500 });
+  }
+};
 
 export const getOneStock = async (req, res) => {
     try {
@@ -25,7 +25,11 @@ export const getOneStock = async (req, res) => {
         console.error(err);
         res.status(500).json({error: err, status_code: 500});
     }
-}
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: err, status_code: 500 });
+  }
+};
 
 export const addStock = async (req, res) => {
     try {
@@ -50,7 +54,12 @@ export const addStock = async (req, res) => {
         console.error(err);
         res.status(500).json({error: err, status_code: 500});
     }
-}
+    res.status(200).json({ data: updatedStock, status_code: 200 });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ error: err, status_code: 500 });
+  }
+};
 
 export const removeStock = async (req, res) => {
     try {
@@ -68,4 +77,8 @@ export const removeStock = async (req, res) => {
         console.error(err);
         res.status(500).json({error: err, status_code: 500});
     }
-}
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: err, status_code: 500 });
+  }
+};
