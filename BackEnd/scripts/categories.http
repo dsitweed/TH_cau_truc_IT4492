@@ -3,10 +3,10 @@
 
 GET http://localhost:5000/api/categories/ HTTP/1.1
 
-### Get one product
+### Get one category
 GET http://localhost:5000/api/categories/{{ID}} HTTP/1.1
 
-### Create product
+### Create category
 POST http://localhost:5000/api/categories/ HTTP/1.1
 Content-Type: application/json
 
@@ -14,7 +14,7 @@ Content-Type: application/json
     "name":"Comedy"
 }
 
-### Update product
+### Update category
 PUT http://localhost:5000/api/categories/{{ID}} HTTP/1.1
 Content-Type: application/json
 
@@ -22,5 +22,5 @@ Content-Type: application/json
     "name":"Funny"
 }
 
-### Delete product
+### Delete category
 DELETE http://localhost:5000/api/categories/{{ID}} HTTP/1.1
