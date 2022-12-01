@@ -6,6 +6,9 @@ const ProductSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    product_id: {
+      type: String
+    },
     supplierId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "suppliers",

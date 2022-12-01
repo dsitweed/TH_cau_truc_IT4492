@@ -21,35 +21,35 @@ paths:
     get:
       tags:
         - products
-      summary: get a list of products
+      summary: Lấy một danh sách các sản phẩm
       description: |
         Search by passing in the appropriate parameters
       parameters:
         - in: query
           name: name
-          description: pass an optional search string for looking up inventory
+          description: truyền một xâu ký tự để tìm kiếm sản phẩm 
           schema:
             type: string
         - in: query
           name: color
-          description: color of expected product
+          description: màu của sản phẩm
           schema:
             type: integer
             format: int32
             minimum: 0
         - in: query
           name: size
-          description: size of expected product
+          description: kích cỡ của sản phẩm
           schema:
             type: string
         - in: query
           name: cat
-          description: category of expected product
+          description: thể loại
           schema:
             type: string
       responses:
         '200':
-          description: search results matching criteria
+          description: kết quả ứng với tiêu chuẩn tìm kiếm
           content:
             application/json:
               schema:
@@ -61,8 +61,8 @@ paths:
     post:
       tags:
         - products
-      summary: adds a new product
-      description: Adds an item to the system
+      summary: Thêm sản phẩm
+      description: Thêm một sản phẩm vào trong hệ thống
       requestBody:
         content:
           application/json:
@@ -70,7 +70,7 @@ paths:
               $ref: '#/components/schemas/Product'
       responses:
         '201':
-          description: item created
+          description: sản phẩm được tạo thành công
         '400':
           description: 'invalid input, object invalid'
         '409':
@@ -79,11 +79,11 @@ paths:
     get:
       tags:
         - products
-      summary: Get product associated with given product_id
+      summary: Lấy sản phẩm với mã id tương ứng
       parameters:
         - in: path
           name: product_id
-          description: ID of the product in query
+          description: Id của sản phẩm
           required: true
           schema:
             type: string
@@ -186,7 +186,7 @@ paths:
     get:
       tags:
         - images
-      summary: Get an image
+      summary: Lấy một ảnh với id tương ứng
       parameters:
         - in: path
           name: image_id
@@ -208,6 +208,57 @@ paths:
                   img:
                     type: string
                     format: base64
+  /stock:
+    post:
+      tags:
+        - stock
+      summary: Nhập thêm sản phẩm mới (chưa có)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                product_id:
+                  type: string
+                  example: 'd290f1ee-6c54-4b01-90e6-d701748f0851'
+                quantity:
+                  type: integer
+                  example: 2
+                size:
+                  type: string
+                  example: 'XL'
+                color:
+                  type: string
+                  example: 'black'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Stock'
+        '500':
+          description:  Internal Server Error
+  /stock/{stock_id}:
+      put:
+        tags:
+          - stock
+        summary: Nhập thêm/Xóa bớt sản phẩm đã có 
+        parameters:
+          - in: path
+            name: stock_id
+            required: true
+            schema:
+              type: string
+              format: uuid
+        responses:
+          '200':
+            description: successful operation
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Stock'
 components:
   schemas:
     Supplier:
@@ -276,3 +327,18 @@ components:
         img_type:
           type: string
           enum: ['png', 'jpeg', 'jpg', 'webp']
+    Stock:
+      type: object
+      required:
+        - product_id
+      properties:
+        product_id:
+          type: string
+          format: uuid
+          example: d290f1ee-6c54-4b01-90e6-d701748f0851
+        quantity:
+          type: integer
+        color:
+          type: string
+        size:
+          type: string
